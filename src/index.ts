@@ -14,4 +14,4 @@ app.delete('/' ,(req:any,res:any)=>{
     res.send("delete working")
 })
 
-app.listen(3000, ()=> console.log('server on port 3000'))
+app.listen(3000, ()=> console.log('server on port 4000'))
