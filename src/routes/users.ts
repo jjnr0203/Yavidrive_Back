@@ -29,6 +29,8 @@ router.get("/:id", (req: any, res: any) => {
       throw error;
     }
     console.log('Put Funcionando');
+    res.status(200).send('Actualizado exitosamente');
+    ;
   });
   });
 
@@ -39,7 +41,8 @@ router.post('/', (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    console.log('Post Funcionando');
+    console.log('Post Funcionando')
+    res.status(201).send('Creado exitosamente');;
   });
   });
 
@@ -49,7 +52,7 @@ router.delete("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    console.log('Delete Funcionando');
+    res.status(200).send('Eliminado correctamente');
   });
   });
 

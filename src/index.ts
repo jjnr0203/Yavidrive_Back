@@ -2,6 +2,8 @@ const express = require('express')
 const app = express();
 import usersRouter from './routes/users';
 
+
+app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/drivers", usersRouter);
 
