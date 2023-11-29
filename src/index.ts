@@ -1,17 +1,8 @@
 const express = require('express') 
 const app = express();
+import usersRouter from './routes/users';
 
-app.get('/' ,(req:any,res:any)=>{
-    res.send("get working")
-})
-app.put('/' ,(req:any,res:any)=>{
-    res.send("put working")
-})
-app.post('/' ,(req:any,res:any)=>{
-    res.send("post working")
-})
-app.delete('/' ,(req:any,res:any)=>{
-    res.send("delete working")
-})
+app.use("/users", usersRouter);
+app.use("/drivers", usersRouter);
 
-app.listen(3000, ()=> console.log('server on port 4000'))
+app.listen(3000, ()=> console.log('server on port 3000'))

@@ -10,4 +10,5 @@ const connectionDB = new Pool({
 
 connectionDB.connect();
 console.log('conexión exitosa')
+
 export default connectionDB;
