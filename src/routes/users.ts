@@ -1,7 +1,6 @@
 import express from 'express';
 import connectionDB from '../database';
 
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -18,7 +17,7 @@ router.get("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    res.send(results.rows[0]);
+    res.send(results.rows);
   });
   });
 
@@ -29,7 +28,7 @@ router.get("/:id", (req: any, res: any) => {
       throw error;
     }
     console.log('Put Funcionando');
-    res.status(200).send('Actualizado exitosamente');
+    res.send('Actualizado exitosamente');
     ;
   });
   });
@@ -42,7 +41,7 @@ router.post('/', (req: any, res: any) => {
       throw error;
     }
     console.log('Post Funcionando')
-    res.status(201).send('Creado exitosamente');;
+    res.send('Creado exitosamente');;
   });
   });
 
@@ -52,7 +51,7 @@ router.delete("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    res.status(200).send('Eliminado correctamente');
+    res.send('Eliminado correctamente');
   });
   });
 
