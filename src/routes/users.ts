@@ -1,6 +1,5 @@
 import express from 'express';
 import connectionDB from '../database';
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -27,22 +26,25 @@ router.get("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    console.log('Put Funcionando');
-    res.send('Actualizado exitosamente');
-    ;
+    res.send(JSON.stringify('Actualizado exitosamente'));
   });
   });
 
-
-router.post('/', (req: any, res: any) => {
-    connectionDB.query("insert into users(cedula, password, email, id_role) values($1,$2,$3,$4)",
-    [req.body.cedula,req.body.password,req.body.email,req.body.id_role], (error: any, results: any) => {
-    if (error) {
-      throw error;
-    }
-    console.log('Post Funcionando')
-    res.send('Creado exitosamente');;
-  });
+  router.post('/', (req: any, res: any) => {
+    const idRole = JSON.parse(req.body.id_role);
+  
+    connectionDB.query(
+      'INSERT INTO users (cedula, password, email, id_role) VALUES ($1, $2, $3, $4)',
+      [req.body.cedula, req.body.password, req.body.email, idRole],
+      (error: any, results: any) => {
+        if (error) {
+          console.log(error)
+          throw error;
+        } else {
+          res.send(JSON.stringify('funcionando'));
+        }
+      }
+    );
   });
 
 
@@ -51,7 +53,7 @@ router.delete("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    res.send('Eliminado correctamente');
+    res.send(JSON.stringify('Eliminado correctamente'));
   });
   });
 
