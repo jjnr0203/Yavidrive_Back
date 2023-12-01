@@ -41,7 +41,7 @@ router.get("/:id", (req: any, res: any) => {
           console.log(error)
           throw error;
         } else {
-          res.send(JSON.stringify('funcionando'));
+          res.send(JSON.stringify('Usuario Creado'));
         }
       }
     );
