@@ -26,22 +26,21 @@ router.get("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    res.send(JSON.stringify('Actualizado exitosamente'));
+    res.json('Actualizado exitosamente');
   });
   });
 
   router.post('/', (req: any, res: any) => {
     const idRole = JSON.parse(req.body.id_role);
-  
     connectionDB.query(
       'INSERT INTO users (cedula, password, email, id_role) VALUES ($1, $2, $3, $4)',
       [req.body.cedula, req.body.password, req.body.email, idRole],
       (error: any, results: any) => {
         if (error) {
           console.log(error)
-          throw error;
+          res.send(error);
         } else {
-          res.send(JSON.stringify('Usuario Creado'));
+          res.json('Creado exitosamente');
         }
       }
     );
@@ -53,7 +52,7 @@ router.delete("/:id", (req: any, res: any) => {
     if (error) {
       throw error;
     }
-    res.send(JSON.stringify('Eliminado correctamente'));
+    res.json('eliminado correctamente');
   });
   });
 
