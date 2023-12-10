@@ -4,13 +4,15 @@ import connectionDB from './database';
 import usersRouter from './routes/users';
 import loginRouter from './routes/login';
 import routesRouter from './routes/routes';
+import registerRouter from './routes/register';
 const cors = require('cors')
 
 app.use(cors());
 app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
-app.use("/routes", routesRouter)
+app.use("/routes", routesRouter);
+app.use("/register", registerRouter);
 
 app.get('/roles', (req:any, res:any) => {
     connectionDB.query("SELECT * FROM roles", (error, results) => {
