@@ -8,7 +8,7 @@ router.post('/',(req,res)=>{
         res.json('vehiculo creado exitosamente')
     } catch (error) {
         console.log(error);
-        res.send('Error al crear el vehiculo')
+        res.json('Error al crear el vehiculo')
     }
 })
 

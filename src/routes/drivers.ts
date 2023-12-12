@@ -32,7 +32,6 @@ router.put('/:id', (req: any, res: any) => {
 
 router.post('/', async (req: any, res: any) => {
   try {
-    console.log(req.body)
     const newDriver = req.body;
     const driver = await connectionDB.query(
       'INSERT INTO drivers (name_d, lastname_d, photo_d, phone_d,user_id_d) VALUES ($1, $2, $3, $4, $5)RETURNING id_driver',
