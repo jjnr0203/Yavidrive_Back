@@ -30,20 +30,22 @@ router.get("/:id", (req: any, res: any) => {
   });
   });
 
-  router.post('/', (req: any, res: any) => {
+  router.post('/', async(req: any, res: any) => {
     const idRole = JSON.parse(req.body.id_role);
-    connectionDB.query(
-      'INSERT INTO users (cedula, password, email, id_role) VALUES ($1, $2, $3, $4)',
-      [req.body.cedula, req.body.password, req.body.email, idRole],
-      (error: any, results: any) => {
-        if (error) {
-          console.log(error)
-          res.send(error);
-        } else {
-          res.json('Creado exitosamente');
-        }
-      }
-    );
+    try {
+      const newUser = req.body
+      const user= await connectionDB.query('INSERT INTO users (cedula, password, email, role_id) VALUES ($1, $2, $3, $4) RETURNING id_user',
+        [req.body.cedula, req.body.password, req.body.email, idRole]);
+        
+      const newUserId = {
+        id_user : user.rows[0].id_user,
+        ...newUser
+      }  
+        res.send(newUserId);
+      } catch (error){
+        res.send('Error al crear el usuario');
+        console.log(error)
+    }
   });
 
 
