@@ -4,15 +4,20 @@ const router = express.Router();
 router.use(express.json());
 
 router.post('/', (req, res) => {
-    connectionDB.query("SELECT * FROM users where email = $1 or cedula = $1 and password = $2",
-    [req.body.user,req.body.password], (error, results) => {
-        if (results.rows.length > 0) {
-            res.json('Usuario encontrado');
-        }else{
-            res.json('usuario no encontrado')
-        }
+    try {
+        connectionDB.query("SELECT * FROM users where email = $1 or cedula = $1 and password = $2",
+            [req.body.user, req.body.password], (error, results) => {
+                if (results.rows.length > 0) {
+                    res.send(results.rows)
+                } else {
+                    res.json('usuario no encontrado')
+                }
 
-    });
+            });
+    } catch (error) {
+        res.send('error al validar los datos')
+        console.log(error)
+    }
 });
 
 export default router;
