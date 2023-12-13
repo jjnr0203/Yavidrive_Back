@@ -4,6 +4,7 @@ import connectionDB from './database';
 import usersRouter from './routes/users';
 import loginRouter from './routes/login';
 import routesRouter from './routes/routes';
+
 import registerRouter from './routes/register';
 import vehicleRouter from './routes/vehicle';
 import driversRouter from './routes/drivers';
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/routes", routesRouter);
+
+
 app.use("/register", registerRouter);
 app.use("/vehicle", vehicleRouter);
 app.use("/drivers", driversRouter);
