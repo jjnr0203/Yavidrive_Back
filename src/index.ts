@@ -17,8 +17,6 @@ app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/routes", routesRouter);
-
-
 app.use("/register", registerRouter);
 app.use("/vehicle", vehicleRouter);
 app.use("/drivers", driversRouter);
