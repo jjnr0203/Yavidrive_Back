@@ -4,7 +4,7 @@ import connectionDB from '../database';
 const router = express.Router();
 
 router.get('/', (req, res)=>{
-    connectionDB.query("SELECT * FROM routes, drivers", (error, results)=>{
+    connectionDB.query("SELECT * FROM routes, drivers where routes.driver_id = drivers.id_driver", (error, results)=>{
         if(error){
             throw error;
         }
