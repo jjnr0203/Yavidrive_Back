@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import connectionDB from '../database';
 
 const router = express.Router();
@@ -55,5 +55,19 @@ router.delete('/:id', (req, res)=>{
         res.json('Borrado')
     });
 });
+
+
+
+router.post('/register',(req:any, res:any)=>{
+    const idRoute = JSON.parse(req.body.id_route);
+    const idCustomer = JSON.parse(req.body.id_customer);
+connectionDB.query("INSERT INTO register(start_date, end_date, routes_id, customer_id) VALUES (CURRENT_DATE,CURRENT_DATE + INTERVAL '1 month' ,$1,$2)",[idRoute, idCustomer],(error:any, results:any)=>{
+    if (error) {
+        throw error; 
+    }
+    console.log(Response)
+});
+}
+)
 
 export default router;

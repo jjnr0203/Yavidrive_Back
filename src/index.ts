@@ -27,4 +27,13 @@ app.get('/roles', (req:any, res:any) => {
     });
 });
 
+app.get('/zone', (req:any, res:any) => {
+    connectionDB.query("SELECT * FROM zone", (error, results) => {
+        if (error) {
+            throw error;
+        }
+        res.send(results.rows);
+    });
+});
+
 app.listen(3000, ()=> console.log('server on port 3000'))
