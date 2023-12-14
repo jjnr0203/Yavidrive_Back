@@ -11,12 +11,12 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get("/:id", (req: any, res: any) => {
-  connectionDB.query("select * from driver where id_user = $1", [req.params.id], (error: any, results: any) => {
+router.get('/:id', (req: any, res: any) => {
+  connectionDB.query("select * from drivers,users where drivers.user_id_d = users.id_user and users.id_user = $1", [req.params.id], (error: any, results: any) => {
     if (error) {
       throw error;
     }
-    res.send(results.rows);
+    res.send(results.rows[0]);
   });
 });
 
