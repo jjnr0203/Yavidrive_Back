@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express, { json, response } from 'express';
 import connectionDB from '../database';
 
 const router = express.Router();
@@ -36,10 +36,8 @@ router.put('/:id',(req:any, res:any)=>{
 });
 
 router.post('/', (req:any, res:any)=>{
-    const idDriver = JSON.parse(req.body.id_driver);
-    const idZone = JSON.parse(req.body.id_zone);
-
-    connectionDB.query('INSERT INTO routes (description, id_driver, id_zone, availability) VALUES ($1, $2, $3, $4)',[req.body.description, idDriver, idZone, req.body.availability],(error:any, results:any)=>{
+    const idZone = JSON.parse(req.body.id_zone)
+    connectionDB.query('INSERT INTO routes (description,driver_id, zone_id, availability) VALUES ($1, $2, $3, $4)',[req.body.description, req.body.driverId,idZone, req.body.availability],(error:any, results:any)=>{
         if(error){
             throw error;
         }
