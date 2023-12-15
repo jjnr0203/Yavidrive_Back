@@ -33,7 +33,7 @@ router.put('/:id',(req:any, res:any)=>{
 
 router.post('/', (req:any, res:any)=>{
     const idZone = JSON.parse(req.body.id_zone)
-    connectionDB.query('INSERT INTO routes (description,driver_id, zone_id, availability) VALUES ($1, $2, $3, $4)',[req.body.description, req.body.driverId,idZone, req.body.availability],(error:any, results:any)=>{
+    connectionDB.query('INSERT INTO routes (description,driver_id, zone_id, availability, price) VALUES ($1, $2, $3, $4,$5)',[req.body.description, req.body.driverId,idZone, req.body.availability,req.body.price],(error:any, results:any)=>{
         if(error){
             throw error;
         }
