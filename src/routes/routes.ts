@@ -13,21 +13,17 @@ router.get('/', (req, res)=>{
 });
 
 router.get("/:id", (req, res)=>{
-    connectionDB.query("SELECT * FROM  routes where id_routes = $1",[req.params.id],(error, results)=>{
+    connectionDB.query("SELECT routes.description, routes.zone_id, routes.price, routes.availability, routes.id_routes FROM  routes,drivers,users where routes.driver_id = drivers.id_driver and drivers.user_id = users.id_user and users.id_user = $1",[req.params.id],(error, results)=>{
         if(error){
             throw error;
         }
-        res.send(results.rows)
+        res.send(results.rows[0])
     });
 });
 
 router.put('/:id',(req:any, res:any)=>{
-
-    const idDriver = JSON.parse(req.body.id_driver);
-    const idZone = JSON.parse(req.body.id_zone);
-
-    connectionDB.query('UPDATE routes set description = $1, id_driver = $2, id_zone = $3, availability = $4 WHERE id_routes = $5',
-    [req.body.description, idDriver, idZone, req.body.availability, req.params.id],(error:any,results:any)=>{
+    connectionDB.query('UPDATE routes set description = $1, zone_id = $2, availability = $3, driver_id = $4, price = $5 WHERE routes.id_routes = $6',
+    [req.body.description, req.body.id_zone, req.body.availability,req.body.driverId,req.body.price, req.params.id],(error:any,results:any)=>{
         if(error){
             throw error;
         }
