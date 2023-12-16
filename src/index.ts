@@ -4,7 +4,6 @@ import connectionDB from './database';
 import usersRouter from './routes/users';
 import loginRouter from './routes/login';
 import routesRouter from './routes/routes';
-
 import registerRouter from './routes/register';
 import vehicleRouter from './routes/vehicle';
 import driversRouter from './routes/drivers';
