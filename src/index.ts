@@ -9,6 +9,7 @@ import vehicleRouter from './routes/vehicle';
 import driversRouter from './routes/drivers';
 import homeRouter from './routes/home';
 import customerRouter from './routes/customer';
+
 const cors = require('cors')
 
 app.use(cors());
