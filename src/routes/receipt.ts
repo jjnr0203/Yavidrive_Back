@@ -10,7 +10,6 @@ router.get('/:id', (req : any, res : any) => {
             throw error;
         }
         res.send(results.rows[0]);
-        console.log("datos del servicio");
     });
 });
 

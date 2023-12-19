@@ -8,7 +8,6 @@ router.get('/:id', (req : any, res : any) => {
             throw error;
         }
         res.send(results.rows);
-        console.log("datos de los clientes");
     });
 });
 
