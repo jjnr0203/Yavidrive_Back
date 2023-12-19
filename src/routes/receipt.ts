@@ -5,7 +5,7 @@ import PDF from 'pdfkit';
 const router = express.Router();
 
 router.get('/:id', (req : any, res : any) => {
-    connectionDB.query("SELECT register.start_date, register.end_date, routes.description, zone.name AS name_z, drivers.name AS name_d, drivers.lastname AS lastname_d, drivers.photo AS photo_d, drivers.phone AS phone_d, vehicle.registration, vehicle.color, vehicle.model, vehicle.brand FROM register,  routes,  zone, drivers, vehicle, customer WHERE register.customer_id=$1  AND customer.id_customer=$1 and register.routes_id=routes.id_routes AND routes.driver_id=drivers.id_driver AND vehicle.driver_id=drivers.id_driver AND routes.zone_id=zone.id_zone", [req.params.id], (error, results) => {
+    connectionDB.query("SELECT register.start_date, register.end_date, routes.description, zone.name AS name_z, drivers.name AS name_d, drivers.lastname AS lastname_d, drivers.photo AS photo_d, drivers.phone AS phone_d, vehicle.registration, vehicle.color, vehicle.model, vehicle.brand FROM register,  routes,  zone, drivers, vehicle, customer,users WHERE register.routes_id = routes.id_routes AND routes.zone_id = zone.id_zone AND routes.driver_id = drivers.id_driver  AND vehicle.driver_id = drivers.id_driver AND register.customer_id = customer.id_customer AND customer.user_id = users.id_user AND users.id_user = $1", [req.params.id], (error, results) => {
         if (error) {
             throw error;
         }
@@ -17,8 +17,7 @@ router.get('/:id', (req : any, res : any) => {
 //Pdf
 router.get('/download/:id', async (req: Request, res: Response) => {
     try {
-        const data = await connectionDB.query(
-            "SELECT register.start_date, register.end_date, routes.description, zone.name AS name_z, drivers.name AS name_d, drivers.lastname AS lastname_d, drivers.photo AS photo_d, drivers.phone AS phone_d, vehicle.registration, vehicle.color, vehicle.model, vehicle.brand FROM register,  routes,  zone, drivers, vehicle, customer WHERE register.customer_id=$1  AND customer.id_customer=$1 and register.routes_id=routes.id_routes AND routes.driver_id=drivers.id_driver AND vehicle.driver_id=drivers.id_driver AND routes.zone_id=zone.id_zone",
+        const data = await connectionDB.query("SELECT register.start_date, register.end_date, routes.description, zone.name AS name_z, drivers.name AS name_d, drivers.lastname AS lastname_d, drivers.photo AS photo_d, drivers.phone AS phone_d, vehicle.registration, vehicle.color, vehicle.model, vehicle.brand FROM register,  routes,  zone, drivers, vehicle, customer,users WHERE register.routes_id = routes.id_routes AND routes.zone_id = zone.id_zone AND routes.driver_id = drivers.id_driver  AND vehicle.driver_id = drivers.id_driver AND register.customer_id = customer.id_customer AND customer.user_id = users.id_user AND users.id_user = $1",
             [req.params.id]
         );
         const row = data.rows[0];
