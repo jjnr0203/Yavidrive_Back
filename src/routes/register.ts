@@ -13,13 +13,13 @@ router.get('/:id', (req : any, res : any) => {
 
 router.post('',(req:any, res:any)=>{
     try {
-        const idRoute = req.body.id_route;
-    const idCustomer = req.body.id_customer;
+    const idRoute = req.body.idRoute;
+    const idCustomer = req.body.customer;
     connectionDB.query("INSERT INTO register(start_date, end_date, routes_id, customer_id) VALUES (CURRENT_DATE,CURRENT_DATE + INTERVAL '1 month' ,$1,$2)",[idRoute, idCustomer],(error:any, results:any)=>{
     res.send('Registro creado')
     });
     } catch (error) {
-        console.log(error)
+    console.log(error)
     }
 })
 
