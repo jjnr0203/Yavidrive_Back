@@ -33,7 +33,7 @@ router.put('/:id', (req: any, res: any) => {
 router.post('/',(req: any, res: any) => {
   try {
     connectionDB.query(
-      'INSERT INTO drivers (name, lastname, photo, phone,user_id) VALUES ($1, $2, $3, $4, $5)RETURNING id_driver',
+      'INSERT INTO drivers (name, lastname, photo, phone,user_id) VALUES ($1, $2, $3, $4, $5)',
       [req.body.name, req.body.lastname, req.body.photo, req.body.phone, req.body.user_id]);
     res.json('conductor creado');
   } catch (error) {
