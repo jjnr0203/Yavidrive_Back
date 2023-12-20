@@ -3,7 +3,7 @@ import connectionDB from '../database';
 const router = express.Router();
 
 router.get('/:id', (req: any, res: any) => {
-  connectionDB.query("select customer.id_customer, customer.name from customer,users where customer.user_id = users.id_user and users.id_user = $1", [req.params.id], (error: any, results: any) => {
+  connectionDB.query("select customer.id_customer, customer.name, customer.lastname, customer.photo, customer.phone from customer, users where customer.user_id = users.id_user and users.id_user = $1", [req.params.id], (error: any, results: any) => {
     if (error) {
       throw error;
     }
@@ -28,5 +28,11 @@ router.post('/', async (req: any, res: any) => {
     console.log(error);
   }
 });
+
+router.put('/:id', (req:any, res:any)=>{
+  connectionDB.query('UPDATE customer set photo = $1, phone = $2 WHERE customer.id_customer = $3',
+  [req.body.photo, req.body.phone, req.params.id]);
+  res.json('datos del customer actualizados');
+})
 
 export default router;
