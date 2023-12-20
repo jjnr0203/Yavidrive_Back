@@ -30,19 +30,14 @@ router.put('/:id', (req: any, res: any) => {
     });
 });
 
-router.post('/', async (req: any, res: any) => {
+router.post('/',(req: any, res: any) => {
   try {
-    const newDriver = req.body;
-    const driver = await connectionDB.query(
+    connectionDB.query(
       'INSERT INTO drivers (name, lastname, photo, phone,user_id) VALUES ($1, $2, $3, $4, $5)RETURNING id_driver',
       [req.body.name, req.body.lastname, req.body.photo, req.body.phone, req.body.user_id]);
-    const newDriverID = {
-      id_driver: driver.rows[0].id_driver,
-      ...newDriver
-    }
-    res.send(newDriverID);
+    res.json('conductor creado');
   } catch (error) {
-    res.send('Error al crear el conductor');
+    res.json('Error al crear el conductor');
     console.log(error);
   }
 });
